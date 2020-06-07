@@ -1,0 +1,17 @@
+server {
+        listen 80;
+
+        root /var/www/html/webclock;
+        index index.html;
+
+        server_name localhost;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+        location /api {
+                proxy_pass http://localhost:8002/;
+        }
+
+}
+

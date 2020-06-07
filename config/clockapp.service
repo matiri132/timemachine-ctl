@@ -1,0 +1,12 @@
+[Unit]
+Description=nodejs instance for ser TimeMachine
+After=network.target
+
+[Service]
+User=timemachine
+Group=www-data
+WorkingDirectory=/home/timemachine/
+ExecStart=timemachineapi
+
+[Install]
+WantedBy=multi-user.target

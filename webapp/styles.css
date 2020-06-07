@@ -1,0 +1,46 @@
+p {
+	font-size: 25px;
+}
+::placeholder { 
+  color: #AEBCAF;
+  opacity: 0.7;
+}
+.selclock {
+	left: 100px;
+	text-align: center;
+
+    font-size: 20px;
+}
+.selclock:focus{
+	background-color: lightblue; 
+}
+.but{
+	font-size: 17px;
+	margin: 5px;
+}
+.but:focus{
+	background-color: #848A93;
+}
+div {
+	text-align:center;
+    height:325px;
+    width:400px;
+	background-color: #AEBCAF;
+    border: 3px solid black;
+}
+.clock {
+	background-color: #93A3A4;
+	font-size: 35px;
+	width: 15%;
+	height: 10%;
+	border: 2px solid purple;
+	border-radius: 4px;
+    text-align: center;
+	margin: 8px 
+}
+.clock:focus{
+  background-color: lightblue;
+}
+.selclock{
+  width: 30%
+}
