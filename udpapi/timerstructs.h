@@ -10,7 +10,7 @@
 #include <errno.h>
 #include <string.h>
 
-#define PORT 7672	//The port on which to listen for incoming data
+#define PORT 7372	//The port on which to listen for incoming data
 
 typedef struct _pre_msg{
 

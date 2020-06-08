@@ -24,9 +24,9 @@ form.addEventListener('submit', (event) => {
 });
 
 function clearFields(){
-    let hour = getElementById("hour");
-    let min = getElementById("min");
-    let sec = getElementById("sec");
+    let hour = document.getElementById("hour");
+    let min = document.getElementById("min");
+    let sec = document.getElementById("sec");
     hour.value = "";
     min.value = "";
     sec.value = "";
@@ -87,7 +87,6 @@ function tabsubmit1(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if(charCode == 13){
         url = "/api/set"
-        //postJSON(url)
         return true;
     }
     if (charCode > 95 && charCode < 106)
@@ -103,7 +102,6 @@ function tabsubmit2(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if(charCode == 13){
         url = "/api/start"
-        postJSON(url)
         return true;
     }
     if (charCode > 95 && charCode < 106 )
@@ -119,7 +117,6 @@ function tabsubmit3(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if(charCode == 13){
         url = "/api/reset"
-        postJSON(url)
         return true;
     }
     if (charCode > 95 && charCode < 106 )
