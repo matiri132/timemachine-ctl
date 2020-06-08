@@ -29,7 +29,6 @@ int callback_post_set(const struct _u_request * request, struct _u_response * re
 int callback_post_reset(const struct _u_request * request, struct _u_response * response, void * user_data);
 int callback_post_start(const struct _u_request * request, struct _u_response * response, void * user_data);
 int callback_default(const struct _u_request * request, struct _u_response * response, void * user_data);
-char* print_map(const struct _u_map * map);
 int getclockIp(char* clk , char* address);
 void sigintHandler();
 
@@ -117,25 +116,25 @@ int callback_post_set(const struct _u_request * request, struct _u_response * re
             strcpy(address ,"192.168.1.225" );
         }
     }else{
-        perror("Fail to get info from webapp");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp");
         return -1;
     }
     if(!strncmp(keys[1],"h" , 1)){
         hours = u_map_get(request->map_post_body, keys[1]);
     }else{
-        perror("Fail to get info from webapp , setting default");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
         hours = "00";
     }
     if(!strncmp(keys[2],"m",1)){
         min = u_map_get(request->map_post_body, keys[2]);
     }else{
-        perror("Fail to get info from webapp , setting default");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
         min = "00";
     }
     if(!strncmp(keys[3],"s" , 1)){
         sec = u_map_get(request->map_post_body, keys[3]);
     }else{
-        perror("Fail to get info from webapp , setting default");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
         sec = "00";
     }        
 
@@ -170,31 +169,33 @@ int callback_post_start(const struct _u_request * request, struct _u_response * 
     const char* clock;
     char* address=o_malloc(20);
     char logmesg[100] = "";
-
+    int err = 0;
     int fsock;
 
     /** Validate the fields from post and if not use default values  **/
     keys = u_map_enum_keys(request->map_post_body);
-   
+    
     if(!strncmp(keys[0],"clk" , 3)){
         clock = u_map_get(request->map_post_body, keys[0]);
-       // getclockIp(clock , address );
+        if(getclockIp(clock , address) == -1 ){
+            strcpy(address ,"192.168.1.225" );
+        }
     }else{
-        perror("Fail to get info from webapp");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp");
         return -1;
     }
     
-    strcpy(address ,"192.168.100.235" );
-    sprintf(logmesg , " -START- OK id:%s " , clock);
-    y_log_message(Y_LOG_LEVEL_INFO , logmesg);
-
     fsock = createSocket();
 
-    
-    if(! clock_start_pause(fsock , address, "01")){
+    err = clock_start_pause(fsock , address, "01");
+    if(!err ){
+        sprintf(logmesg , " -START- OK id:%s " , clock);
+        y_log_message(Y_LOG_LEVEL_INFO , logmesg);
 	    ulfius_set_string_body_response(response, 200, logmesg);
  	}else{
-        ulfius_set_string_body_response(response, 303, "Start failed...");
+        sprintf(logmesg , " -START- OK FAIL:%s error: %d " , clock , err);
+        y_log_message(Y_LOG_LEVEL_INFO , logmesg);
+        ulfius_set_string_body_response(response, 303, logmesg);
    }
 
    
@@ -230,25 +231,25 @@ int callback_post_reset(const struct _u_request * request, struct _u_response * 
         clock = u_map_get(request->map_post_body, keys[0]);
         getclockIp(clock , address );
     }else{
-        perror("Fail to get info from webapp");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp");
         return -1;
     }
     if(!strncmp(keys[1],"h" , 1)){
         hours = u_map_get(request->map_post_body, keys[1]);
     }else{
-        perror("Fail to get info from webapp , setting default");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
         hours = "00";
     }
     if(!strncmp(keys[2],"m",1)){
         min = u_map_get(request->map_post_body, keys[2]);
     }else{
-        perror("Fail to get info from webapp , setting default");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
         min = "00";
     }
     if(!strncmp(keys[3],"s" , 1)){
         sec = u_map_get(request->map_post_body, keys[3]);
     }else{
-        perror("Fail to get info from webapp , setting default");
+        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
         sec = "00";
     }        
 
@@ -292,37 +293,13 @@ void sigintHandler(){
 	
 } 
 
-
-char * print_map(const struct _u_map * map) {
-  char * line, * to_return = NULL;
-  const char **keys, * value;
-  int len, i;
-  if (map != NULL) {
-    keys = u_map_enum_keys(map);
-    for (i=0; keys[i] != NULL; i++) {
-      value = u_map_get(map, keys[i]);
-      len = snprintf(NULL, 0, "key is %s, value is %s", keys[i], value);
-      line = o_malloc((len+1)*sizeof(char));
-      snprintf(line, (len+1), "key is %s, value is %s", keys[i], value);
-      if (to_return != NULL) {
-        len = o_strlen(to_return) + o_strlen(line) + 1;
-        to_return = o_realloc(to_return, (len+1)*sizeof(char));
-        if (o_strlen(to_return) > 0) {
-          strcat(to_return, "\n");
-        }
-      } else {
-        to_return = o_malloc((o_strlen(line) + 1)*sizeof(char));
-        to_return[0] = 0;
-      }
-      strcat(to_return, line);
-      o_free(line);
-    }
-    return to_return;
-  } else {
-    return NULL;
-  }
-}
-
+/**
+ * @brief Get clock ip from /home/timemachine/.iplist
+ * 
+ * @param clk 
+ * @param address 
+ * @return int 
+ */
 int getclockIp(char* clk, char* address){
     FILE* file;
     char str[100];
@@ -331,7 +308,7 @@ int getclockIp(char* clk, char* address){
     const char* s = "$";
     file = fopen("/home/timemachine/.iplist" , "r");
     if(file == NULL){
-        perror("Error with the IP file");
+        y_log_message(Y_LOG_LEVEL_INFO , "Error with the IP file");
         return -1;
     }
     while (fscanf(file, "%s", str)!=EOF){
@@ -342,7 +319,6 @@ int getclockIp(char* clk, char* address){
         }
     }
     fclose(file);
-    printf("%s\n" , ip);
     strcpy(address , ip );
     return 0;
 }

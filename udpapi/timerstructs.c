@@ -193,10 +193,10 @@ int clock_start_pause(int sockfd , char* address , char* mode ){
 
     if(err == 0){
         perror("Setup package not sended");
-        return -1;
+        return -3;
     }else if(err == -1){
         perror("UDP error ");
-        return -1;
+        return -4;
     }else{
         n = recvfrom(sockfd, &response, 1, MSG_WAITALL,
                     (struct sockaddr *) &servaddr, (unsigned int* restrict)sizeof(servaddr)); 
@@ -204,7 +204,7 @@ int clock_start_pause(int sockfd , char* address , char* mode ){
             return 0;
         }else{
             perror("Corrupted info.");
-            return -1;
+            return -4;
         }
 
     }

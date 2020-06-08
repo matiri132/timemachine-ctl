@@ -19,18 +19,9 @@ form.addEventListener('submit', (event) => {
     xhr.onload = () => {
         alert(xhr.responseText);
         console.log(xhr.responseText);
-        clearFields();
     }
 });
 
-function clearFields(){
-    let hour = document.getElementById("hour");
-    let min = document.getElementById("min");
-    let sec = document.getElementById("sec");
-    hour.value = "";
-    min.value = "";
-    sec.value = "";
-}
 
 function isNumberKey1(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
