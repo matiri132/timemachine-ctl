@@ -1,0 +1,18 @@
+[Unit]
+Description=Chromium Kiosk
+Wants=graphical.target
+After=graphical.target
+
+[Service]
+User=timemachine
+Group=www-data
+Environment=DISPLAY=:0.0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+Type=simple
+ExecStartPre=/bin/bash /home/timemachine/.kiosk/kiosk.sh
+ExecStart=/usr/bin/chromium-browser --noerrdialogs --disable-infobars --kiosk http://localhost/
+Restart=on-abort
+
+
+[Install]
+WantedBy=graphical.target

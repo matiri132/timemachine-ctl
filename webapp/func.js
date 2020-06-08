@@ -1,5 +1,6 @@
 var url;
 
+
 form.addEventListener('submit', (event) => {
     // disable default action
     event.preventDefault();
@@ -27,9 +28,9 @@ function isNumberKey1(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if (charCode > 95 && charCode < 106 )
         return true;
-    if (event.keyCode==107)
+    if (charCode==107)
         document.getElementById("min").focus();
-    if (event.keyCode==109)
+    if (charCode==109)
         document.getElementById("clocksel").focus();
     return false;
 }
@@ -37,9 +38,9 @@ function isNumberKey2(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if (charCode > 95 && charCode < 106 )
         return true;
-    if (event.keyCode==107)
+    if (charCode==107)
         document.getElementById("sec").focus();
-    if (event.keyCode==109)
+    if (charCode==109)
         document.getElementById("hour").focus();
     return false;
 }
@@ -47,28 +48,31 @@ function isNumberKey3(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if (charCode > 95 && charCode < 106 )
         return true;
-    if (event.keyCode==107)
+    if (charCode==107)
         document.getElementById("clear").focus();
-    if (event.keyCode==109)
+    if (charCode==109)
         document.getElementById("min").focus();
     return false;
 }
 function tab1(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
-    if(event.keyCode == 38 || event.keyCode ==40 )
+    if(charCode == 38 || charCode ==40 )
         return true;
-    if (event.keyCode==107)
+    if (charCode==107)
         document.getElementById("hour").focus();
-    if (event.keyCode==109)
+    if (charCode==109)
         document.getElementById("reset").focus();
     return false;
 }
 
 function tab2(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (event.keyCode==107)
+    if (charCode == 13){
+        return true;
+    }
+    if (charCode==107)
         document.getElementById("set").focus();
-    if (event.keyCode==109)
+    if (charCode==109)
         document.getElementById("sec").focus();
     return false;
 }	
@@ -82,9 +86,9 @@ function tabsubmit1(evt){
     }
     if (charCode > 95 && charCode < 106)
         return true;
-    if (event.keyCode==107)
+    if (charCode==107)
         document.getElementById("start").focus();
-    if (event.keyCode==109)
+    if (charCode==109)
         document.getElementById("clear").focus();
     return false;
 }	
@@ -97,9 +101,9 @@ function tabsubmit2(evt){
     }
     if (charCode > 95 && charCode < 106 )
         return true;
-    if (event.keyCode==107)
+    if (charCode==107)
         document.getElementById("reset").focus();
-    if (event.keyCode==109)
+    if (charCode==109)
         document.getElementById("set").focus();
     return false;
 }
@@ -112,9 +116,10 @@ function tabsubmit3(evt){
     }
     if (charCode > 95 && charCode < 106 )
         return true;
-    if (event.keyCode==107)
+    if (charCode==107)
         document.getElementById("clocksel").focus();
-    if (event.keyCode==109)
+    if (charCode==109)
         document.getElementById("start").focus();
     return false;
 }
+

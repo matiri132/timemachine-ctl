@@ -1,5 +1,5 @@
 [Unit]
-Description=nodejs instance for ser TimeMachine
+Description=Ulfius server for TimeMachine
 After=network.target
 
 [Service]

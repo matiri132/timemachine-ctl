@@ -217,9 +217,6 @@ int callback_post_reset(const struct _u_request * request, struct _u_response * 
     const char **keys; 
     const char* clock=o_malloc(5);
     char* address=o_malloc(20);
-    const char* hours=o_malloc(3);
-    const char* min=o_malloc(3);
-    const char* sec=o_malloc(3);
     char logmesg[100] = "";
 
     int fsock;
@@ -234,33 +231,14 @@ int callback_post_reset(const struct _u_request * request, struct _u_response * 
         y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp");
         return -1;
     }
-    if(!strncmp(keys[1],"h" , 1)){
-        hours = u_map_get(request->map_post_body, keys[1]);
-    }else{
-        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
-        hours = "00";
-    }
-    if(!strncmp(keys[2],"m",1)){
-        min = u_map_get(request->map_post_body, keys[2]);
-    }else{
-        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
-        min = "00";
-    }
-    if(!strncmp(keys[3],"s" , 1)){
-        sec = u_map_get(request->map_post_body, keys[3]);
-    }else{
-        y_log_message(Y_LOG_LEVEL_INFO , "Fail to get info from webapp , setting default");
-        sec = "00";
-    }        
-
-    //strcpy(address ,"192.168.100.235" );
-    sprintf(logmesg , " -RESET OK- id:%s - %sh %sm %ss " , clock, hours, min, sec );
+    
+    sprintf(logmesg , " -RESET OK- id:%s " , clock );
     y_log_message(Y_LOG_LEVEL_INFO , logmesg);
 
     fsock = createSocket();
 
     
-    if(!clock_setup(fsock , address, "01" , hours, min , sec, "00", "00" )){
+    if(!clock_setup(fsock , address, "01" , "00", "00" , "00", "00", "00" )){
         ulfius_set_string_body_response(response, 200, logmesg);
     }else{
         ulfius_set_string_body_response(response, 303, "Reset failed...");

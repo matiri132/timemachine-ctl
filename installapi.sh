@@ -84,6 +84,14 @@ case $1 in
 
 		systemctl restart nginx
 
+		echo "INSTALLING KIOSK MODE..."
+		echo "disable_splash=1" >> /boot/config.txt
+		cp ${WD}/config/kiosk.sh /home/timemachine/.kiosk.sh
+		cp ${WD}/config/kiosk.service /etc/systemd/system/kiosk.service
+		cp ${WD}/config/kiosk2.service /etc/systemd/system/kiosk2.service
+		sudo systemctl enable kiosk.service
+		sudo systemctl enable kiosk2.service
+
 		echo "INSTALL COMPLETE"
 	;;
 
