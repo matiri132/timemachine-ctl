@@ -14,15 +14,9 @@ install_packages (){
 		echo "Installing NGINX..."
 		apt install nginx -y
 	fi
+	apt install -y libmicrohttpd-dev libjansson-dev libcurl4-gnutls-dev libgnutls28-dev libgcrypt20-dev libsystemd-dev
 	mkdir soft
     cd ${WD}soft
-	if [ ! -f "/usr/local/lib/libulfius.so" ]
-	then    
-        git clone https://github.com/babelouest/ulfius.git
-	    cd ${WD}/ulfius/
-	    make
-	    make install
-	fi
 	if [ ! -f "/usr/local/lib/liborcania.so" ]
 	then	
 		git clone https://github.com/babelouest/orcania.git
@@ -36,6 +30,13 @@ install_packages (){
     	cd ${WD}/yder/
     	make
     	make install
+	fi
+	if [ ! -f "/usr/local/lib/libulfius.so" ]
+	then    
+        git clone https://github.com/babelouest/ulfius.git
+	    cd ${WD}/ulfius/
+	    make
+	    make install
 	fi
 	
     	
