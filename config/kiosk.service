@@ -4,7 +4,7 @@ Wants=graphical.target
 After=graphical.target
 
 [Service]
-User=timemachine
+User=root
 Group=www-data
 Environment=DISPLAY=:0.0
 Environment=XAUTHORITY=/home/pi/.Xauthority
