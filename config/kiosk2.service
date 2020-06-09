@@ -1,15 +1,16 @@
 [Unit]
 Description=Chromium Kiosk Patch
 Wants=graphical.target
-After=graphical.target
+After=graphical.target ngnix.service
 
 [Service]
-User=root
+User=pi
 Group=www-data
 Environment=XAUTHORITY=/home/pi/.Xauthority
 Type=simple
 ExecStart=unclutter -idle 0.5 -root
-Restart=on-abort
+Restart=on-failure
+RestartSec=3s
 
 
 [Install]

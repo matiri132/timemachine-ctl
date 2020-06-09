@@ -1,12 +1,14 @@
 [Unit]
 Description=Ulfius server for TimeMachine
-After=network.target
+After=network.target ngnix.service
 
 [Service]
 User=timemachine
 Group=www-data
 WorkingDirectory=/home/timemachine/
 ExecStart=timemachineapi
+Restart=on-failure
+RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target

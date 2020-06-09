@@ -3,20 +3,17 @@ var url;
 // Execute a function when the user releases a key on the keyboard
 document.addEventListener("keydown", function(event) {
 
-  if (event.keyCode === 111) {
+  if (event.keyCode === 106) {
     url = "/api/set"
     event.preventDefault();
     document.getElementById("set").click();
   }
-  if (event.keyCode === 106) {
+  if (event.keyCode === 111) {
     url = "/api/start"
     event.preventDefault();
     document.getElementById("start").click();
   }
-  if (event.keyCode === 110) {
-    event.preventDefault();
-    document.getElementById("clear").click();
-  }
+
 }); 
 
 form.addEventListener('submit', (event) => {
@@ -41,7 +38,7 @@ function postdata(){
     xhr.send(data);
     // listen for `load` event
     xhr.onload = () => {
-        document.getElementById("status").innerHTML="Status:" + xhr.responseText;
+        document.getElementById("status").innerHTML=xhr.responseText;
         console.log(xhr.responseText);
     }
 }
@@ -49,7 +46,7 @@ function postdata(){
 
 function isNumberKey1(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (charCode > 95 && charCode < 106 )
+    if ((charCode > 95 && charCode < 106) || charCode == 8 )
         return true;
     if (charCode==107)
         document.getElementById("min").focus();
@@ -59,7 +56,7 @@ function isNumberKey1(evt){
 }
 function isNumberKey2(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (charCode > 95 && charCode < 106 )
+    if ((charCode > 95 && charCode < 106) || charCode == 8 )
         return true;
     if (charCode==107)
         document.getElementById("sec").focus();
@@ -69,10 +66,10 @@ function isNumberKey2(evt){
 }
 function isNumberKey3(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (charCode > 95 && charCode < 106 )
+    if ((charCode > 95 && charCode < 106) || charCode == 8 )
         return true;
     if (charCode==107)
-        document.getElementById("clear").focus();
+        document.getElementById("set").focus();
     if (charCode==109)
         document.getElementById("min").focus();
     return false;
@@ -88,19 +85,6 @@ function tab1(evt){
     return false;
 }
 
-function tab2(evt){
-    var charCode = (evt.which) ? evt.which : evt.keyCode
-    if (charCode == 13){
-        return true;
-    }
-    if (charCode==107)
-        document.getElementById("set").focus();
-    if (charCode==109)
-        document.getElementById("sec").focus();
-    return false;
-}	
-
-
 function tabsubmit1(evt){
     var charCode = (evt.which) ? evt.which : evt.keyCode
     if(charCode == 13){
@@ -112,7 +96,7 @@ function tabsubmit1(evt){
     if (charCode==107)
         document.getElementById("start").focus();
     if (charCode==109)
-        document.getElementById("clear").focus();
+        document.getElementById("sec").focus();
     return false;
 }	
 
