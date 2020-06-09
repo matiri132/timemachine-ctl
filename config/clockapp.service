@@ -1,6 +1,7 @@
 [Unit]
 Description=Ulfius server for TimeMachine
-After=network.target ngnix.service
+After=network.target
+Before=nginx.service
 
 [Service]
 User=timemachine

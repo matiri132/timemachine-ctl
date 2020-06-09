@@ -71,7 +71,8 @@ case $1 in
 		#Configure NGINX
 		echo "CONFIGURING NGINX..."
 		cp -r ${WD}/webapp /var/www/html/webclock
-		
+		rm /etc/systemd/system/multi-user.target.wants/nginx.service
+		cp ${WD}/congig/nginx.service  /etc/systemd/system/multi-user.target.wants/nginx.service
 		rm /etc/nginx/sites-enabled/default
 		cp ${WD}/config/clocksite /etc/nginx/sites-available/clocksite
 		ln -s /etc/nginx/sites-available/clocksite /etc/nginx/sites-enabled/default

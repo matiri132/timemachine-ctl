@@ -1,7 +1,7 @@
 [Unit]
 Description=Chromium Kiosk Patch
 Wants=graphical.target
-After=graphical.target ngnix.service
+After=graphical.target
 
 [Service]
 User=pi

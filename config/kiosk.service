@@ -1,7 +1,7 @@
 [Unit]
 Description=Chromium Kiosk
 Wants=graphical.target
-After=graphical.target
+After=graphical.target nginx.service
 
 [Service]
 User=pi
