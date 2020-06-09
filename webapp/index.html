@@ -20,11 +20,13 @@
                 <input id=sec  class=clock type="text" maxlength="2" pattern="[0-5][0-9]" placeholder="30" onfocus="this.select();" onkeydown="return isNumberKey3(event)" required>s
                 <br />
                 <br />
-                <input id=clear class=but type="reset" name="reset" value="CLEAR" onkeydown="return tab2(event)">
+                <button id=clear class=but type="reset" name="reset" onkeydown="return tab2(event)">CLEAR '.'</button>
                 <br />
-                <input id=set   class=but type="submit" value="SET"    onkeydown="return tabsubmit1(event)">
-                <input id=start class=but type="submit" value="START"  onkeydown="return tabsubmit2(event)">
-                <input id=reset class=but type="submit" value="RESET"  onkeydown="return tabsubmit3(event)">
+                <button id=set   class=but type="submit" onkeydown="return tabsubmit1(event)"> SET '/'</button>
+                <button id=start class=but type="submit" onkeydown="return tabsubmit2(event)"> START '*'</button>
+                <button id=reset class=but type="submit" onkeydown="return tabsubmit3(event)"> RESTART </button>
+                <br />
+                 <p id="status" class=status>  </p> 
     </form>
 </div>
 </body>

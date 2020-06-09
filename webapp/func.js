@@ -1,9 +1,32 @@
 var url;
 
+// Execute a function when the user releases a key on the keyboard
+document.addEventListener("keydown", function(event) {
+
+  if (event.keyCode === 111) {
+    url = "/api/set"
+    event.preventDefault();
+    document.getElementById("set").click();
+  }
+  if (event.keyCode === 106) {
+    url = "/api/start"
+    event.preventDefault();
+    document.getElementById("start").click();
+  }
+  if (event.keyCode === 110) {
+    event.preventDefault();
+    document.getElementById("clear").click();
+  }
+}); 
 
 form.addEventListener('submit', (event) => {
     // disable default action
     event.preventDefault();
+    postdata();
+    
+});
+
+function postdata(){
     // configure a request
     const xhr = new XMLHttpRequest();
     xhr.open('POST', url);
@@ -18,10 +41,10 @@ form.addEventListener('submit', (event) => {
     xhr.send(data);
     // listen for `load` event
     xhr.onload = () => {
-        alert(xhr.responseText);
+        document.getElementById("status").innerHTML="Status:" + xhr.responseText;
         console.log(xhr.responseText);
     }
-});
+}
 
 
 function isNumberKey1(evt){
@@ -122,4 +145,3 @@ function tabsubmit3(evt){
         document.getElementById("start").focus();
     return false;
 }
-

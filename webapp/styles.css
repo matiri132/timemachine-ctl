@@ -1,6 +1,10 @@
 p {
 	font-size: 25px;
 }
+.status {
+	font-size: 15px;
+	text-align: center;
+}
 ::placeholder { 
   color: #AEBCAF;
   opacity: 0.7;
@@ -23,7 +27,7 @@ p {
 }
 div {
 	text-align:center;
-    height:325px;
+	height:350px;
     width:400px;
 	background-color: #AEBCAF;
     border: 3px solid black;
