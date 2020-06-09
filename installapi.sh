@@ -100,12 +100,19 @@ case $1 in
 		rm -Rf /var/www/html/webclock
 		systemctl stop clockapp
 		systemctl disable clockapp
+		systemctl stop kiosk
+		systemctl disable kiosk
+		systemctl stop kiosk2
+		systemctl disable kiosk2		
 		rm /etc/systemd/system/clockapp.service
+		rm /etc/systemd/system/kiosk.service
+		rm /etc/systemd/system/kiosk2.service
 		rm /usr/local/sbin/timemachine
 		userdel -r timemachine
 		#Set default nginx
 		rm -f /etc/nginx/sites-enabled/default
 		rm -f /etc/nginx/sites-available/clocksite
+		rm -Rf /var/www/html/webclock
 		ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 		echo "Reloading nginx..."
 		systemctl reload nginx

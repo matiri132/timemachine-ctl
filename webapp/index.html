@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<div>
+<div class=div>
         <p><strong>CLOCK CONTROL</strong></p>
         <form id="form" action="" >
                 <select id=clocksel class=selclock name="dropdown" onkeydown="return tab1(event)">
@@ -25,8 +25,8 @@
                 <button id=set   class=but type="submit" onkeydown="return tabsubmit1(event)"> SET '/'</button>
                 <button id=start class=but type="submit" onkeydown="return tabsubmit2(event)"> START '*'</button>
                 <button id=reset class=but type="submit" onkeydown="return tabsubmit3(event)"> RESTART </button>
-                <br />
-                 <p id="status" class=status>  </p> 
+                <br /><br />
+                 <div class=statusdiv><spare  class=status> Status:</spare><spare id="status" class=status> ... </spare> </div>
     </form>
 </div>
 </body>

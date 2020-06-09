@@ -1,10 +1,7 @@
 p {
 	font-size: 25px;
 }
-.status {
-	font-size: 15px;
-	text-align: center;
-}
+
 ::placeholder { 
   color: #AEBCAF;
   opacity: 0.7;
@@ -25,9 +22,22 @@ p {
 .but:focus{
 	background-color: #848A93;
 }
-div {
+.statusdiv {
+	background-color: rgb(154, 173, 154);
+	border: 1px solid black;
+	display: inline-block;
+}
+.status {
+	font-size: 15px;
+	text-align: center;
+}
+.statusr {
+	font-size: 15px;
+	text-align: center;
+}
+.div {
 	text-align:center;
-	height:350px;
+	height:380px;
     width:400px;
 	background-color: #AEBCAF;
     border: 3px solid black;
